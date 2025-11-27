@@ -1,11 +1,14 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, use } from "react";
 import Header from "../components/Header";
 import TabsCategoria from "../components/TabsCategoria";
 import ProductoCard from "../components/ProductoCard";
 import CarritoDrawer from "../components/CarritoDrawer";
 import ModalPedidoEnviado from "../components/ModalPedidoEnviado";
+import { useParams } from "react-router-dom";
+import PedidoActualDrawer from "../components/PedidoActualDrawer";
 
 function Carta() {
+  const { mesaId } = useParams();
   const [productos, setProductos] = useState([]);
   const [categoriaPrincipal, setCategoriaPrincipal] = useState("Bebidas");
   const [categoriaSecundaria, setCategoriaSecundaria] = useState("");
@@ -13,6 +16,8 @@ function Carta() {
   const [carrito, setCarrito] = useState([]);
   const [carritoVisible, setCarritoVisible] = useState(false);
   const [pedidoModalOpen, setPedidoModalOpen] = useState(false);
+  const [pedidoExistente, setPedidoExistente] = useState(null);
+  const [drawerPedidoExistenteAbierto, setDrawerPedidoExistenteAbierto] = useState(false);
 
   useEffect(() => {
   fetch("http://localhost:4000/api/productos")
@@ -42,7 +47,18 @@ function Carta() {
 }, []);
 
 
-
+useEffect(() => {
+  fetch(`http://localhost:4000/api/pedidos/mesa/${mesaId}`)
+    .then(res => res.json())
+    .then(data => {
+      if (data.length > 0) {
+        const pedidos=data.map(p => p.items);
+        setPedidoExistente(pedidos);
+        setDrawerPedidoExistenteAbierto(true);
+        // El último pedido es el 0 porque están ordenados DESC
+      }
+    });
+}, [mesaId]);
   
 
   const añadirAlCarrito = (producto, cantidadElegida) => {
@@ -92,7 +108,32 @@ function Carta() {
       (categoriaSecundaria === "" ||
         p.subcategoria === categoriaSecundaria)
   );
-
+  const enviarPedido = () => {
+    if (carrito.length === 0) return;
+    const total = carrito.reduce((acc, item) => acc + item.precio * item.cantidad, 0);
+    fetch(`http://localhost:4000/api/pedidos/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ mesa_id: mesaId, items: carrito, total: total ,fecha: new Date().toISOString() })
+    })
+      .then(res => res.json())
+      .then(data => {
+        fetch(`http://localhost:4000/api/mesas/${mesaId}/estado`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ estado: "ocupada" })
+        });
+        setCarritoVisible(false);
+        setTimeout(() => {
+          setCarrito([]);
+          setPedidoModalOpen(true);
+        }, 350);
+      });
+  };
 
   return (
     <div className="w-full min-h-screen bg-[#f4f7fb] flex flex-col">
@@ -126,19 +167,26 @@ function Carta() {
       <CarritoDrawer
         abierto={carritoVisible}
         cerrar={() => setCarritoVisible(false)}
+        
         carrito={carrito}
-        enviarPedido={() => {
-          console.log("Pedido enviado:", carrito);
-          setCarritoVisible(false);
-          setTimeout(() => {
-            setCarrito([]);
-            setPedidoModalOpen(true);
-          }, 350);
-        }}
+        enviarPedido={enviarPedido}
         aumentarCantidad={aumentarCantidad}
         disminuirCantidad={disminuirCantidad}
         eliminarProducto={eliminarProducto}
       />
+{pedidoExistente && (
+
+      <PedidoActualDrawer
+        abierto={drawerPedidoExistenteAbierto}
+        cerrar={() => setDrawerPedidoExistenteAbierto(false)}
+        pedido={pedidoExistente}
+        abrirNuevoPedido={() => {
+          setDrawerPedidoExistenteAbierto(false);
+          setCarritoVisible(false);
+        }}
+
+      />
+      )}
       <ModalPedidoEnviado
         abierto={pedidoModalOpen}
         cerrar={() => setPedidoModalOpen(false)}

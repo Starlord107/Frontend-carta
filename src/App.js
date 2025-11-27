@@ -1,26 +1,23 @@
-import { useEffect, useState } from "react";
-import "./App.css";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import SeleccionarMesa from "./pages/SeleccionarMesa";
 import Carta from "./pages/Carta";
+import Header from "./components/Header";
 
 function App() {
-  const [carrito, setCarrito] = useState([]);
-  const añadirAlCarrito = (producto) => {
-    setCarrito(prevCarrito => {
-      const existente= prevCarrito.find(item => item.id === producto.id);
-      if (existente) {
-        return prevCarrito.map(item => 
-          item.id === producto.id 
-            ? { ...item, cantidad: item.cantidad + 1 } 
-            : item
-        );
-      } else {
-        return [...prevCarrito, { ...producto, cantidad: 1 }];
-      }
-    });
-  };
 
-  return <Carta />;
+  return (
+    <BrowserRouter>
+      <Routes>
 
+        {/* Pantalla inicial: seleccionar mesa */}
+        <Route path="/" element={<SeleccionarMesa />} />
+
+        {/* Pantalla de carta, recibe mesaId */}
+        <Route path="/carta/:mesaId" element={<Carta />} />
+
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
 export default App;

@@ -1,14 +1,19 @@
 import { Button } from "@heroui/react";
+import { use } from "react";  
+import { useEffect } from "react";
 
 export default function CarritoDrawer({
   abierto,
   cerrar,
   carrito,
+  pedidoActual,
   enviarPedido,
   aumentarCantidad,
   disminuirCantidad,
   eliminarProducto,
 }) {
+
+  
   const total = carrito.reduce(
     (acc, item) => acc + item.precio * item.cantidad,
     0
@@ -27,14 +32,15 @@ export default function CarritoDrawer({
     >
       {/* HEADER */}
       <div className="flex justify-between items-center p-5 border-b border-blue-900">
-        <h2 className="text-xl font-bold text-white">Tu Pedido</h2>
+        <h2 className="text-xl font-bold text-white">Pedido Nuevo</h2>
         <button onClick={cerrar} className="text-white text-xl leading-none">
           Cerrar
         </button>
       </div>
 
+      
       {/* LISTA */}
-      <div className="overflow-y-auto px-5 py-4 mb-40">
+      <div className="overflow-y-auto   px-5 py-4 " style={{ height: "calc(75vh - 160px)" }}>
         {carrito.length === 0 ? (
           <p className="text-gray-400 text-center py-6">
             El carrito está vacío
@@ -89,6 +95,7 @@ export default function CarritoDrawer({
           ))
         )}
       </div>
+      
 
       {/* FOOTER */}
       <div className="sticky bottom-0 left-0 right-0 bg-[#0a0f3d] p-5 border-t border-blue-900 shadow-lg">
@@ -107,7 +114,7 @@ export default function CarritoDrawer({
   
   
   style={{ backgroundColor: "#1f40ff" ,color: "white" , fontWeight: "600",
-    padding: "14px",
+    padding: "8px",
 }}
 isDisabled={carrito.length === 0}
 

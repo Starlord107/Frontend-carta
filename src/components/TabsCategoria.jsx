@@ -45,7 +45,7 @@ export default function CategoriasTabs({
   key="Bebidas"
   title={
     <div className="flex  items-center  justify-center  w-full gap-2">
-      <img src={categoriaPrincipal==="Bebidas"?"  bebidas/bebidawhite.png":"bebidas/bebida.png"} width="30" height="40" alt="Bebidas" />
+      <img src={categoriaPrincipal==="Bebidas"?"  /bebidas/bebidawhite.png":"/bebidas/bebida.png"} width="30" height="40" alt="Bebidas" />
       <span>Bebidas</span>
     </div>
   }
@@ -103,12 +103,12 @@ export default function CategoriasTabs({
   const iconSrc =
   categoriaPrincipal === "Bebidas"
     ? (categoriaSecundaria === sub
-        ? `bebidas/${fileName}white.png`
-        : `bebidas/${fileName}.png`)
+        ? `/bebidas/${fileName}white.png`
+        : `/bebidas/${fileName}.png`)
     : categoriaPrincipal === "Comidas"
     ? (categoriaSecundaria === sub
-        ? `comidas/${fileName}white.png`
-        : `comidas/${fileName}.png`)
+        ? `/comidas/${fileName}white.png`
+        : `/comidas/${fileName}.png`)
     : null;
 
   return (
@@ -118,7 +118,10 @@ export default function CategoriasTabs({
         <div className="flex items-center gap-2">
           <img
             src={iconSrc}
-           className="w-6 h-6 object-contain"
+           className={
+             `object-contain ${sub==="Platos"?"w-10 h-12":"w-6 h-6"}`
+           }
+
             alt={sub}
           />
           <span>{sub}</span>
