@@ -16,6 +16,8 @@ function App() {
     <BrowserRouter>
       <Routes>
 
+        <Route path="/" element={<Navigate to="/cliente/carta" replace/>}/>
+
         {/* LOGIN CAMARERO */}
         <Route path="/camarero/login" element={<LoginCamarero />} />
 
@@ -39,7 +41,6 @@ function App() {
         />
 
         {/* CLIENTE */}
-        <Route path="/cliente/carta" element={<CartaCliente />} />
 
       </Routes>
     </BrowserRouter>

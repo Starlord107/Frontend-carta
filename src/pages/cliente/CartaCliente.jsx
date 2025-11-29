@@ -3,6 +3,7 @@ import HeaderCliente from "../../components/HeaderCliente";
 import TabsCategoria from "../../components/TabsCategoria";
 import ProductoCard from "../../components/ProductoCard";
 import ProductoCardCliente from "../../components/ProductoCardCliente";
+import { API_URL } from "../../config"; // <-- CORRECTO
 
 function CartaCliente() {
   const [productos, setProductos] = useState([]);
@@ -12,7 +13,7 @@ function CartaCliente() {
   
 
   useEffect(() => {
-  fetch("http://localhost:4000/api/productos")
+fetch(`${API_URL}/api/productos`)
     .then(res => res.json())
     .then(data => {
 
