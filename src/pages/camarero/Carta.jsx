@@ -1,12 +1,11 @@
 import { useState, useEffect, use } from "react";
-import Header from "../components/Header";
-import TabsCategoria from "../components/TabsCategoria";
-import ProductoCard from "../components/ProductoCard";
-import CarritoDrawer from "../components/CarritoDrawer";
-import ModalPedidoEnviado from "../components/ModalPedidoEnviado";
+import Header from "../../components/Header";
+import TabsCategoria from "../../components/TabsCategoria";
+import ProductoCard from "../../components/ProductoCard";
+import CarritoDrawer from "../../components/CarritoDrawer";
+import ModalPedidoEnviado from "../../components/ModalPedidoEnviado";
 import { useParams } from "react-router-dom";
-import PedidoActualDrawer from "../components/PedidoActualDrawer";
-
+import PedidoActualDrawer from "../../components/PedidoActualDrawer";
 function Carta() {
   const { mesaId } = useParams();
   const [productos, setProductos] = useState([]);

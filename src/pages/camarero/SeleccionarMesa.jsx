@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import HeaderMesa from "../components/HeaderMesa";
 
 export default function SeleccionarMesa() {
   const [mesas, setMesas] = useState([]);
@@ -13,7 +12,7 @@ export default function SeleccionarMesa() {
   }, []);
 
   const seleccionarMesa = (mesa) => {
-    navigate(`/carta/${mesa.id}`);
+    navigate(`/camarero/carta/${mesa.id}`);
   };
 
   const cerrarMesa = async (id) => {
@@ -34,7 +33,6 @@ export default function SeleccionarMesa() {
 
   return (
     <>
-      <HeaderMesa />
 
       <div className="p-6">
         <h1 className="text-2xl text-center font-bold mb-6 text-[#1f40ff]">
