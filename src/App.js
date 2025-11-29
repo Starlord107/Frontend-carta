@@ -4,6 +4,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import SeleccionarMesa from "./pages/camarero/SeleccionarMesa";
 import Carta from "./pages/camarero/Carta";
 import LoginCamarero from "./pages/camarero/LoginCamarero";
+import { Navigate } from "react-router-dom";
+
 
 // RUTA CLIENTE
 import CartaCliente from "./pages/cliente/CartaCliente";
