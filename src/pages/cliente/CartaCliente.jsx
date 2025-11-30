@@ -4,7 +4,7 @@ import TabsCategoria from "../../components/TabsCategoria";
 import ProductoCard from "../../components/ProductoCard";
 import ProductoCardCliente from "../../components/ProductoCardCliente";
 
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:4000";
+const API_URL = process.env.REACT_APP_API_URL || "http://localhost:4000";
 function CartaCliente() {
   const [productos, setProductos] = useState([]);
   const [categoriaPrincipal, setCategoriaPrincipal] = useState("Bebidas");
