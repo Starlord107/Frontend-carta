@@ -3,8 +3,8 @@ import HeaderCliente from "../../components/HeaderCliente";
 import TabsCategoria from "../../components/TabsCategoria";
 import ProductoCard from "../../components/ProductoCard";
 import ProductoCardCliente from "../../components/ProductoCardCliente";
-import { API_URL } from "../../config"; // <-- CORRECTO
 
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:4000";
 function CartaCliente() {
   const [productos, setProductos] = useState([]);
   const [categoriaPrincipal, setCategoriaPrincipal] = useState("Bebidas");

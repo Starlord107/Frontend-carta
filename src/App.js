@@ -43,6 +43,8 @@ function App() {
         />
 
         {/* CLIENTE */}
+                <Route path="/cliente/carta" element={<CartaCliente />} />
+
 
       </Routes>
     </BrowserRouter>
