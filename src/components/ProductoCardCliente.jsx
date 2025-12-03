@@ -20,7 +20,7 @@ const precioFinal =tieneFormatos ?formatoActual.precio :producto.precio
     <div className="rounded-xl bg-white border border-[#1E40FF] shadow-[0_0_15px_rgba(46,107,255,0.3)] p-4">
       {/* IMAGEN */}
       <img
-        src={`/${producto.imagen}`}
+        src={producto.imagen}
         alt={producto.nombre}
         className="w-full object-contain rounded-lg mb-3 bg-black/10"
       />
