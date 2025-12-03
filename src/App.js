@@ -12,6 +12,7 @@ import CartaCliente from "./pages/cliente/CartaCliente";
 
 // PROTECCIÓN DE RUTAS
 import PrivateRoute from "./components/PrivateRoute";
+import AdminProductos from "./pages/camarero/AdminProductos";
 
 function App() {
   return (
@@ -40,7 +41,12 @@ function App() {
               <Carta />
             </PrivateRoute>
           }
+          
         />
+        <Route
+          path="/camarero/AdminProductos"
+          element={AdminProductos}
+          />
 
         {/* CLIENTE */}
                 <Route path="/cliente/carta" element={<CartaCliente />} />
