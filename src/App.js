@@ -45,9 +45,9 @@ function App() {
         />
         <Route
           path="/camarero/AdminProductos"
-          element={<PrivateRoute>
+          element={
       <AdminProductos />
-    </PrivateRoute>}
+   }
           />
 
         {/* CLIENTE */}
