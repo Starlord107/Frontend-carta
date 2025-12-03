@@ -82,7 +82,7 @@ export default function CategoriasTabs({
           classNames={{
             tabList: "flex w-max justify-start gap-4",
             tab: `
-              px-6 py-1.5 rounded-xl text-sm font-semibold
+              px-8 py-1.5 rounded-xl text-sm font-semibold
               data-[selected=true]:bg-[#1f40ff]
               data-[selected=true]:text-white
               data-[selected=false]:bg-transparent
@@ -115,7 +115,7 @@ export default function CategoriasTabs({
     <Tab
       key={sub}
       title={
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-">
           <img
             src={iconSrc}
            className={
