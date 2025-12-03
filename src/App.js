@@ -13,7 +13,6 @@ import CartaCliente from "./pages/cliente/CartaCliente";
 
 // PROTECCIÓN DE RUTAS
 import PrivateRoute from "./components/PrivateRoute";
-import AdminProductos from "./pages/camarero/AdminProductos";
 
 function App() {
   return (
