@@ -14,7 +14,7 @@ export default function LoginCamarero() {
     e.preventDefault();
 
     try {
-      const res = await fetch("http://localhost:4000/api/camareros/login", {
+      const res = await fetch("https://backend-carta.vercel.app/api/camareros/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ usuario, password })
