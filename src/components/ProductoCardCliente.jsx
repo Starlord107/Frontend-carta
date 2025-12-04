@@ -66,6 +66,10 @@ className="w-full h-64 object-cover rounded-lg mb-3"
         <h2 className="text-lg font-semibold text-[#1f40ff]">
           {producto.nombre}
         </h2>
+                <h2 className="text-lg font-semibold text-[#1f40ff]">
+          {producto.descripcioninfo}
+                </h2>
+
 
         <p className="text-[#1f40ff] font-bold mb-8">
           {precioFinal ? `${precioFinal} €` : ""}
