@@ -30,8 +30,8 @@ className="w-full h-64 object-cover rounded-lg mb-3"
   />
 ) : (
   <div className="w-full rounded-lg mb-3 bg-black/5 p-3 text-sm text-[#1f40ff] leading-tight">
-    {producto.descripcioninfo
-      ? producto.descripcioninfo
+    {producto.descripcion
+      ? producto.descripcion
       : "Sin imagen disponible "}
   </div>
 )}
@@ -67,9 +67,11 @@ className="w-full h-64 object-cover rounded-lg mb-3"
         <h2 className="text-lg font-semibold text-[#1f40ff]">
           {producto.nombre}
         </h2>
-                <h2 className="text-lg font-semibold text-[#1f40ff]">
-          {producto.descripcioninfo}
-                </h2>
+        {producto.descripcioninfo && (
+          <p className="text-sm text-gray-700 mt-1 px-2 leading-snug">
+            {producto.descripcioninfo}
+          </p>
+        )}
 
 
         <p className="text-[#1f40ff] font-bold mb-8">
