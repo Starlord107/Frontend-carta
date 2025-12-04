@@ -18,7 +18,7 @@ const precioFinal =tieneFormatos ?formatoActual.precio :producto.precio
 
   return (
     <div className="rounded-xl bg-white border border-[#1E40FF] shadow-[0_0_15px_rgba(46,107,255,0.3)] p-4 bg-cover bg-center"
-    style={{backgroundImage:"url('/Fondos/fondo1.jpg')"}}
+    style={{backgroundImage:"url('/Fondos/platosfondos.jpg')"}}
     
     
     >
@@ -50,12 +50,13 @@ const precioFinal =tieneFormatos ?formatoActual.precio :producto.precio
 
       {/* NOMBRE Y PRECIO (USAR precioFinal) */}
       <div className="mb-4 text-center"
-      style={{backgroundImage:"url('/Fondos/backgroundwhite.jpg')",
-        backgroundSize:"cover",
-        backgroundPosition:"center",
-        borderRadius:"16px",
-        overflow:"hidden"
-      }}>
+        /* style={{
+          backgroundImage: "url('/Fondos/backgroundwhite.jpg')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          borderRadius: "16px",
+          overflow: "hidden"
+      }} */ >
         <h2 className="text-lg font-semibold text-[#1f40ff]">
           {producto.nombre}
         </h2>
