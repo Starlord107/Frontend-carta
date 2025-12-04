@@ -21,12 +21,19 @@ const precioFinal =tieneFormatos ?formatoActual.precio :producto.precio
     
     
     >
-      {/* IMAGEN */}
-      <img
-        src={producto.imagen}
-        alt={producto.nombre}
-        className="w-full h-48 object-cover rounded-lg mb-3"
-      />
+      {producto.imagen ? (
+  <img
+    src={producto.imagen}
+    alt={producto.nombre}
+    className="w-full object-contain rounded-lg mb-3 bg-black/10"
+  />
+) : (
+  <div className="w-full rounded-lg mb-3 bg-black/5 p-3 text-sm text-gray-700 leading-tight">
+    {producto.descripcion
+      ? producto.descripcion
+      : "Sin imagen disponible."}
+  </div>
+)}
 
       {/* SELECTOR DE FORMATO */}
       {tieneFormatos && (
