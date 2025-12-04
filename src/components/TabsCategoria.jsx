@@ -82,9 +82,7 @@ export default function CategoriasTabs({
           classNames={{
             tabList: "flex w-max justify-start gap-4",
             tab: `
-              flex-1 min-w-0 text-center
-
-              px-4 py-2 rounded-xl text-sm font-semibold
+              px-8 py-1.5 rounded-xl text-sm font-semibold
               data-[selected=true]:bg-[#1f40ff]
               data-[selected=true]:text-white
               data-[selected=false]:bg-transparent
