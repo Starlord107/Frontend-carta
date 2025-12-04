@@ -25,7 +25,7 @@ const precioFinal =tieneFormatos ?formatoActual.precio :producto.precio
   <img
     src={producto.imagen}
     alt={producto.nombre}
-    className="w-full h-48 object-cover rounded-lg mb-3"
+    className="w-full h-60 object-cover rounded-lg mb-3"
   />
 ) : (
   <div className="w-full rounded-lg mb-3 bg-black/5 p-3 text-sm text-gray-700 leading-tight">
