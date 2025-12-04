@@ -68,7 +68,7 @@ className="w-full h-64 object-cover rounded-lg mb-3"
           {producto.nombre}
         </h2>
         {producto.descripcioninfo && (
-          <p className="text-sm text-gray-700 mt-1 px-2 leading-snug">
+          <p className="text-sm text-[#1f40ff] mt-1 px-2 leading-snug">
             {producto.descripcioninfo}
           </p>
         )}
