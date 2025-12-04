@@ -115,7 +115,7 @@ export default function CategoriasTabs({
     <Tab
       key={sub}
       title={
-        <div className="flex items-center gap-">
+        <div className="flex items-center gap-2">
           <img
             src={iconSrc}
            className={
