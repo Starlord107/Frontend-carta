@@ -19,6 +19,13 @@ console.log(producto);
 
   return (
     <div className="rounded-xl bg-white border border-[#1E40FF] shadow-[0_0_15px_rgba(46,107,255,0.3)] p-4 bg-cover bg-center"
+    style={{
+          backgroundImage: "url('/Fondos/azul.jpg')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          borderRadius: "16px",
+          overflow: "hidden"
+      }}
     
     
     >
@@ -57,26 +64,22 @@ className="w-full h-64 object-cover rounded-lg mb-3"
 
       {/* NOMBRE Y PRECIO (USAR precioFinal) */}
       <div className="mb-4 text-center"
-        /* style={{
-          backgroundImage: "url('/Fondos/backgroundwhite.jpg')",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          borderRadius: "16px",
-          overflow: "hidden"
-      }} */ >
+          >
+        <div className="bg-white">
         <h2 className="text-lg font-semibold text-[#1f40ff]">
           {producto.nombre}
         </h2>
         {producto.descripcioninfo && (
-          <p className="text-sm text-[#1f40ff] mt-1 px-2 leading-snug">
+          <p className="text-sm text-[#1f40ff] mt-1 px-2 py-2 leading-snug">
             {producto.descripcioninfo}
           </p>
         )}
 
 
-        <p className="text-[#1f40ff] font-bold mb-8">
+        <p className="text-[#1f40ff] font-bold mb-8 py-2">
           {precioFinal ? `${precioFinal} €` : ""}
         </p>
+        </div>
       </div>
 
      
