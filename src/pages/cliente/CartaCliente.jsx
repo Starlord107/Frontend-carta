@@ -78,7 +78,7 @@ fetch(`${API_URL}/api/productos`)
 
       {/* Mostrar productos solo si hay subcategoría */}
       {categoriaSecundaria !== "" && (
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 p-4">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 p-4">
           {productosFiltrados.map(p => (
             <ProductoCardCliente
               key={p.id}
