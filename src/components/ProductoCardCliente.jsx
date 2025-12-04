@@ -13,6 +13,7 @@ const precioFinal =tieneFormatos ?formatoActual.precio :producto.precio
   // Precio final a mostrar
 
   
+console.log(producto);
 
  
 
