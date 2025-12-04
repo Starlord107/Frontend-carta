@@ -119,7 +119,7 @@ export default function CategoriasTabs({
           <img
             src={iconSrc}
            className={
-             `object-contain ${sub==="Platos"?"w-10 h-12":"w-10 h-12"}`
+             `object-contain ${sub==="Platos"?"w-10 h-12":"w-6 h-6"}`
            }
 
             alt={sub}
