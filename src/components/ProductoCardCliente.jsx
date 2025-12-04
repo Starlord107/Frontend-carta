@@ -31,7 +31,7 @@ const precioFinal =tieneFormatos ?formatoActual.precio :producto.precio
   <div className="w-full rounded-lg mb-3 bg-black/5 p-3 text-sm text-gray-700 leading-tight">
     {producto.descripcion
       ? producto.descripcion
-      : "Sin imagen disponible."}
+      : producto.descripcion}
   </div>
 )}
 
