@@ -53,7 +53,7 @@ const precioFinal =tieneFormatos ?formatoActual.precio :producto.precio
       style={{backgroundImage:"url('/Fondos/backgroundwhite.jpg')",
         backgroundSize:"cover",
         backgroundPosition:"center",
-        borderRadius:"20px",
+        borderRadius:"16px",
         overflow:"hidden"
       }}>
         <h2 className="text-lg font-semibold text-[#1f40ff]">
