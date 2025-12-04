@@ -18,7 +18,6 @@ const precioFinal =tieneFormatos ?formatoActual.precio :producto.precio
 
   return (
     <div className="rounded-xl bg-white border border-[#1E40FF] shadow-[0_0_15px_rgba(46,107,255,0.3)] p-4 bg-cover bg-center"
-    style={{backgroundImage:"url('/Fondos/platosfondos.jpg')"}}
     
     
     >
