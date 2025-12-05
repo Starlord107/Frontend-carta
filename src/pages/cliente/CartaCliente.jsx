@@ -83,6 +83,7 @@ fetch(`${API_URL}/api/productos`)
             <ProductoCardCliente
               key={p.id}
               producto={p}
+              categoriaSecundaria={categoriaSecundaria}
             />
           ))}
         </div>

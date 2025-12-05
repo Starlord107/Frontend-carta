@@ -8,11 +8,21 @@ function HeaderCliente() {
   const navigate = useNavigate();
 
   return (
-    <header className="flex justify-between items-center   border-b border-[#1f40ff] px-6 py-4">
+    <header className="flex justify-between items-center   border-b border-[#1f40ff] px-6 py-4"
+    style={{ backgroundImage: "url('/Fondos/azul2.jpg')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          
+          }}
+    >
 
       {/* LOGO */} 
+      
       <LogoIcon size={70} />
-      <div className="flex-grow mx-4 items-center text-center">
+      <div className="flex-grow mx-4 items-center text-center "
+      
+      
+      >
        
       </div>
      
