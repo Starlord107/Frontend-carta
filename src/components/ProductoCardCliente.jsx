@@ -55,6 +55,13 @@ const imagenDinamica=esCerveza && imagenesPorCerveza[marca]?.[formatoActual?.nom
 const precioFinal =tieneFormatos ?formatoActual.precio :producto.precio
   // Precio final a mostrar
 
+
+  const formatosOrdenados=[...producto.formatos].sort((a,b)=>{
+    if(a.nombre==="Copa") return -1;
+    if(b.nombre==="Botella") return 1;
+    return 0;
+
+  });
   
 console.log(producto);
 
@@ -63,7 +70,7 @@ console.log(producto);
   return (
     <div className="rounded-xl bg-white border border-[#1E40FF] shadow-[0_0_15px_rgba(46,107,255,0.3)] p-4 bg-cover bg-center"
     style={{
-          backgroundImage: "url('/Fondos/azul2.jpg')",
+          backgroundImage: "url('/Fondos/fondofinal.png')",
           backgroundSize: "cover",
           backgroundPosition: "center",
           borderRadius: "16px",
@@ -110,7 +117,8 @@ className="w-full h-64 object-cover rounded-lg mb-3"
             setFormatoActual(formato);
           }}
         >
-          {producto.formatos.map((formato) => (
+          
+          {formatosOrdenados.map((formato) => (
             <option key={formato.id} value={formato.id}>
               {formato.nombre} - {formato.precio} €
             </option>

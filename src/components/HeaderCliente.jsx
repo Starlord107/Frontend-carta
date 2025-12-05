@@ -9,7 +9,7 @@ function HeaderCliente() {
 
   return (
     <header className="flex justify-between items-center   border-b border-[#1f40ff] px-6 py-4"
-    style={{ backgroundImage: "url('/Fondos/azul2.jpg')",
+    style={{ backgroundImage: "url('/Fondos/fondofinal.png')",
           backgroundSize: "cover",
           backgroundPosition: "center",
           
