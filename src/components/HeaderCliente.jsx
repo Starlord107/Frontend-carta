@@ -8,7 +8,7 @@ function HeaderCliente() {
   const navigate = useNavigate();
 
   return (
-    <header className="flex justify-between items-center   border-b border-[#1f40ff] px-6 py-4"
+    <header className="flex justify-between items-center   border-b border-[#9ee4ff] px-6 py-4"
     style={{ backgroundImage: "url('/Fondos/fondofinal.png')",
           backgroundSize: "cover",
           backgroundPosition: "center",

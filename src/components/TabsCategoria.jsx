@@ -16,7 +16,7 @@ export default function CategoriasTabs({
 
 
       {/* ------------------ TABS PRINCIPALES (siempre visibles) ------------------ */}
-      <div className="bg-white border border-gray-300 rounded-2xl px-3 py-2 shadow-md no-scrollbar w-full">
+      <div className="bg-white border border-[#8fdfff] rounded-2xl px-3 py-2 shadow-md no-scrollbar w-full">
         <Tabs
         disableAnimation
         fullWidth
@@ -68,7 +68,7 @@ export default function CategoriasTabs({
 
 
       {/* ------------------ TABS SECUNDARIAS (siempre visibles) ------------------ */}
-<div className="bg-white border border-gray-300 rounded-2xl px-3 py-2 shadow-md 
+<div className="bg-white border border-[#8fdfff] rounded-2xl px-3 py-2 shadow-md 
                 overflow-x-auto whitespace-nowrap no-scrollbar w-full">
         <Tabs
           disableAnimation

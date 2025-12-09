@@ -68,7 +68,7 @@ console.log(producto);
  
 
   return (
-    <div className="rounded-xl bg-white border border-[#1E40FF] shadow-[0_0_15px_rgba(46,107,255,0.3)] p-4 bg-cover bg-center"
+    <div className="rounded-xl bg-white border border-[#8fdfff] shadow-[0_0_15px_rgba(46,107,255,0.3)] p-4 bg-cover bg-center"
     style={{
           backgroundImage: "url('/Fondos/fondofinal.png')",
           backgroundSize: "cover",
