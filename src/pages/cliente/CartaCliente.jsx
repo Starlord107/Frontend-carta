@@ -10,6 +10,7 @@ console.log("API_URL usado:", API_URL);
 
 function CartaCliente() {
   const [productos, setProductos] = useState([]);
+  const [categoriaPrincipal, setCategoriaPrincipal] = useState("Bebidas");
   const [categoriaSecundaria, setCategoriaSecundaria] = useState("");
 
   
