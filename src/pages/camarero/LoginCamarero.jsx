@@ -6,7 +6,7 @@ export default function LoginCamarero() {
   const { login } = useAuth();
   const navigate = useNavigate();
 
-  const [usuario, setUsuario] = useState("");
+  const [nombre, setNombre] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
@@ -17,7 +17,7 @@ export default function LoginCamarero() {
       const res = await fetch("https://backend-carta.vercel.app/api/camareros/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ usuario, password })
+        body: JSON.stringify({ nombre, password })
       });
 
       const data = await res.json();
@@ -50,8 +50,8 @@ export default function LoginCamarero() {
             type="text"
             className="login-input"
             placeholder="Usuario"
-            value={usuario}
-            onChange={(e) => setUsuario(e.target.value)}
+            value={nombre}
+            onChange={(e) => setNombre(e.target.value)}
             required
           />
 

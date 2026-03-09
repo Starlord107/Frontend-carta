@@ -13,6 +13,7 @@ const imagenesPorCerveza={
 
 
 },
+
 "Voll Damm":{
     "Botella": "https://res.cloudinary.com/dnhmo2rbe/image/upload/v1764936181/volldamm_sswdvu.webp",
 
@@ -50,6 +51,8 @@ const [formatoActual, setFormatoActual] = useState(
   );
   const marca=producto.nombre;
 const esCerveza=categoriaSecundaria==="Cervezas";
+console.log("nombre producto:", producto.nombre);
+console.log("formatos:", producto.formatos);
 const imagenDinamica=esCerveza && imagenesPorCerveza[marca]?.[formatoActual?.nombre];  
  
 const precioFinal =tieneFormatos ?formatoActual.precio :producto.precio
