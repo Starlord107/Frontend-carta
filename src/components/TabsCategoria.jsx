@@ -24,7 +24,6 @@ export default function CategoriasTabs({
           selectedKey={categoriaPrincipal}
           onSelectionChange={(key) => {
             setCategoriaPrincipal(key);
-            setCategoriaSecundaria(""); // Reset subtabs
           }}
           color="default"
           variant="solid"
