@@ -12,7 +12,7 @@ function App() {
 
 
 
-      <Route path="/cliente/CartaCliente" element={<Carta />} />
+      <Route path="/" element={<Carta />} />
        
 
         
