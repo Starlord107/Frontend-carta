@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import Header from "../../components/Header";
+import HeaderCliente from "../../components/HeaderCliente";
 import TabsCategoria from "../../components/TabsCategoria";
 import ProductoCard from "../../components/ProductoCard";
 import CarritoDrawer from "../../components/CarritoDrawer";
@@ -180,9 +180,8 @@ function Carta() {
 
   return (
     <div className="w-full min-h-screen bg-[#f4f7fb] flex flex-col">
-      <Header
-        abrirCarrito={() => setCarritoVisible(true)}
-        carritoCount={carrito.reduce((acc, item) => acc + item.cantidad, 0)}
+      <HeaderCliente
+        
       />
 
       <main className="w-full max-w-screen-sm mx-auto px-3">
