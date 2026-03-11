@@ -20,7 +20,7 @@ function Carta() {
   }, [categoriaPrincipal]);
 
   useEffect(() => {
-    fetch("http://localhost:4000/api/productos")
+    fetch("https://backend-carta.onrender.com/api/productos")
       .then((res) => res.json())
       .then((data) => {
         const productosConSubcategoria = data.map((p) => {
