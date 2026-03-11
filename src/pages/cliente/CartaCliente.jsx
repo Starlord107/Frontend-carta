@@ -1,101 +1,237 @@
-import { useState, useEffect, use } from "react";
-import HeaderCliente from "../../components/HeaderCliente";
+import { useState, useEffect } from "react";
+import Header from "../../components/Header";
 import TabsCategoria from "../../components/TabsCategoria";
 import ProductoCard from "../../components/ProductoCard";
-import ProductoCardCliente from "../../components/ProductoCardCliente";
+import CarritoDrawer from "../../components/CarritoDrawer";
+import ModalPedidoEnviado from "../../components/ModalPedidoEnviado";
+import { useParams } from "react-router-dom";
+import PedidoActualDrawer from "../../components/PedidoActualDrawer";
 
-const API_URL = process.env.REACT_APP_API_URL;
-console.log("API_URL usado:", API_URL);
-
-
-function CartaCliente() {
+function Carta() {
+  const { mesaId } = useParams();
   const [productos, setProductos] = useState([]);
-  const [categoriaPrincipal, setCategoriaPrincipal] = useState("Bebidas");
-  const [categoriaSecundaria, setCategoriaSecundaria] = useState("");
 
-  
+  const categorias = {
+    Bebidas: ["Cocteles", "Vinos", "Sangrias", "Tragos", "Refrescos", "Cervezas"],
+    Comidas: ["Hamburguesas", "Tapas", "Bocadillos", "Platos", "Postres"],
+  };
+
+  const [categoriaPrincipal, setCategoriaPrincipal] = useState("Bebidas");
+  const [categoriaSecundaria, setCategoriaSecundaria] = useState(categorias.Bebidas[0]);
+
+  const [carrito, setCarrito] = useState([]);
+  const [carritoVisible, setCarritoVisible] = useState(false);
+  const [pedidoModalOpen, setPedidoModalOpen] = useState(false);
+  const [pedidoExistente, setPedidoExistente] = useState(null);
+  const [drawerPedidoExistenteAbierto, setDrawerPedidoExistenteAbierto] = useState(false);
+
+  // Cuando cambie la categoría principal, seleccionar automáticamente la primera subcategoría
+  useEffect(() => {
+    setCategoriaSecundaria(categorias[categoriaPrincipal][0]);
+  }, [categoriaPrincipal]);
 
   useEffect(() => {
-fetch(`${API_URL}/api/productos`)
-    .then(res => res.json())
-    .then(data => {
+    fetch("http://localhost:4000/api/productos")
+      .then((res) => res.json())
+      .then((data) => {
+        const productosConSubcategoria = data.map((p) => {
+          if (p.subcategoria) return p;
 
-      const productosConSubcategoria = data.map(p => {
-        if (p.subcategoria) return p; // Si ya tiene subcategoria, la dejamos
+          if (p.imagen.includes("Bocadillos")) return { ...p, subcategoria: "Bocadillos" };
+          if (p.imagen.includes("Hamburguesas")) return { ...p, subcategoria: "Hamburguesas" };
+          if (p.imagen.includes("Tapas")) return { ...p, subcategoria: "Tapas" };
+          if (p.imagen.includes("Platos")) return { ...p, subcategoria: "Platos" };
+          if (p.imagen.includes("Postres")) return { ...p, subcategoria: "Postres" };
 
-        // Determinar subcategoría según la ruta de imagen
-        if (p.imagen.includes("Bocadillos")) return { ...p, subcategoria: "Bocadillos" };
-        if (p.imagen.includes("Hamburguesas")) return { ...p, subcategoria: "Hamburguesas" };
-        if (p.imagen.includes("Tapas")) return { ...p, subcategoria: "Tapas" };
-        if (p.imagen.includes("Platos")) return { ...p, subcategoria: "Platos" };
+          if (p.imagen.includes("Cocteles")) return { ...p, subcategoria: "Cocteles" };
+          if (p.imagen.includes("Vinos")) return { ...p, subcategoria: "Vinos" };
+          if (p.imagen.includes("Sangrias")) return { ...p, subcategoria: "Sangrias" };
+          if (p.imagen.includes("Refrescos")) return { ...p, subcategoria: "Refrescos" };
+          if (p.imagen.includes("Tragos")) return { ...p, subcategoria: "Tragos" };
+          if (p.imagen.includes("Cervezas")) return { ...p, subcategoria: "Cervezas" };
 
-        if (p.imagen.includes("Cocteles")) return { ...p, subcategoria: "Cocteles" };
-        if (p.imagen.includes("Vinos")) return { ...p, subcategoria: "Vinos" };
-        if (p.imagen.includes("Sangrias")) return { ...p, subcategoria: "Sangrias" };
-        if (p.imagen.includes("Refrescos")) return { ...p, subcategoria: "Refrescos" };
-        if (p.imagen.includes("Tragos")) return { ...p, subcategoria: "Tragos" };
+          return p;
+        });
 
-        return p; // Si no coincidió nada
+        setProductos(productosConSubcategoria);
       });
+  }, []);
 
-      setProductos(productosConSubcategoria);
+  useEffect(() => {
+    fetch(`http://localhost:4000/api/pedidos/mesa/${mesaId}`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.length > 0) {
+          const pedidos = data.map((p) => p.items);
+          setPedidoExistente(pedidos);
+          setDrawerPedidoExistenteAbierto(true);
+        }
+      });
+  }, [mesaId]);
+
+  const añadirAlCarrito = (producto, cantidadElegida) => {
+    setCarrito((prev) => {
+      const existe = prev.find(
+        (p) => p.id === producto.id && p.formato === producto.formato
+      );
+
+      if (existe) {
+        return prev.map((p) =>
+          p.id === producto.id && p.formato === producto.formato
+            ? {
+                ...p,
+                cantidad: p.cantidad + cantidadElegida,
+                precio_total: (p.cantidad + cantidadElegida) * p.precio,
+              }
+            : p
+        );
+      }
+
+      return [
+        ...prev,
+        {
+          ...producto,
+          cantidad: cantidadElegida,
+          precio_total: cantidadElegida * producto.precio,
+        },
+      ];
     });
-}, []);
+  };
 
+  const aumentarCantidad = (id) => {
+    setCarrito((prev) =>
+      prev.map((item) =>
+        item.id === id
+          ? {
+              ...item,
+              cantidad: item.cantidad + 1,
+              precio_total: (item.cantidad + 1) * item.precio,
+            }
+          : item
+      )
+    );
+  };
 
+  const disminuirCantidad = (id) => {
+    setCarrito((prev) =>
+      prev
+        .map((item) =>
+          item.id === id
+            ? {
+                ...item,
+                cantidad: Math.max(0, item.cantidad - 1),
+                precio_total: Math.max(0, item.cantidad - 1) * item.precio,
+              }
+            : item
+        )
+        .filter((item) => item.cantidad > 0)
+    );
+  };
 
-  
+  const eliminarProducto = (id) => {
+    setCarrito((prev) => prev.filter((item) => item.id !== id));
+  };
 
-  
-
-
-  
-
-  
-
-  // Filtrar productos por categorías
+  // Filtrado limpio: siempre hay una subcategoría seleccionada
   const productosFiltrados = productos.filter(
-    p =>
+    (p) =>
       p.categoria === categoriaPrincipal &&
-      (categoriaSecundaria === "" ||
-        p.subcategoria === categoriaSecundaria)
+      p.subcategoria === categoriaSecundaria
   );
-  
+
+  const enviarPedido = () => {
+    if (carrito.length === 0) return;
+
+    const total = carrito.reduce(
+      (acc, item) => acc + item.precio * item.cantidad,
+      0
+    );
+
+    fetch("http://localhost:4000/api/pedidos/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        mesa_id: mesaId,
+        items: carrito,
+        total: total,
+        fecha: new Date().toISOString(),
+      }),
+    })
+      .then((res) => res.json())
+      .then(() => {
+        fetch(`http://localhost:4000/api/mesas/${mesaId}/estado`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ estado: "ocupada" }),
+        });
+
+        setCarritoVisible(false);
+
+        setTimeout(() => {
+          setCarrito([]);
+          setPedidoModalOpen(true);
+        }, 350);
+      });
+  };
 
   return (
     <div className="w-full min-h-screen bg-[#f4f7fb] flex flex-col">
+      <Header
+        abrirCarrito={() => setCarritoVisible(true)}
+        carritoCount={carrito.reduce((acc, item) => acc + item.cantidad, 0)}
+      />
 
-      <HeaderCliente
-      />
       <main className="w-full max-w-screen-sm mx-auto px-3">
-      <TabsCategoria
-        categoriaPrincipal={categoriaPrincipal}
-        setCategoriaPrincipal={setCategoriaPrincipal}
-        categoriaSecundaria={categoriaSecundaria}
-        setCategoriaSecundaria={setCategoriaSecundaria}
-      />
+        <TabsCategoria
+          categoriaPrincipal={categoriaPrincipal}
+          setCategoriaPrincipal={setCategoriaPrincipal}
+          categoriaSecundaria={categoriaSecundaria}
+          setCategoriaSecundaria={setCategoriaSecundaria}
+        />
       </main>
 
-      {/* Mostrar productos solo si hay subcategoría */}
-      {categoriaSecundaria !== "" && (
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 p-4">
-          {productosFiltrados.map(p => (
-            <ProductoCardCliente
-              key={p.id}
-              producto={p}
-              categoriaSecundaria={categoriaSecundaria}
-            />
-          ))}
-        </div>
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 p-4">
+        {productosFiltrados.map((p) => (
+          <ProductoCard
+            key={p.id}
+            producto={p}
+            añadirAlCarrito={añadirAlCarrito}
+          />
+        ))}
+      </div>
+
+      <CarritoDrawer
+        abierto={carritoVisible}
+        cerrar={() => setCarritoVisible(false)}
+        carrito={carrito}
+        enviarPedido={enviarPedido}
+        aumentarCantidad={aumentarCantidad}
+        disminuirCantidad={disminuirCantidad}
+        eliminarProducto={eliminarProducto}
+      />
+
+      {pedidoExistente && (
+        <PedidoActualDrawer
+          abierto={drawerPedidoExistenteAbierto}
+          cerrar={() => setDrawerPedidoExistenteAbierto(false)}
+          pedido={pedidoExistente}
+          abrirNuevoPedido={() => {
+            setDrawerPedidoExistenteAbierto(false);
+            setCarritoVisible(false);
+          }}
+        />
       )}
 
-      
-
-
-      
+      <ModalPedidoEnviado
+        abierto={pedidoModalOpen}
+        cerrar={() => setPedidoModalOpen(false)}
+      />
     </div>
-    
   );
 }
 
-export default CartaCliente;
+export default Carta;
