@@ -103,10 +103,16 @@ export default function CategoriasTabs({
                 }`}
               >
                 <img
-                  src={iconSrc}
-                  className={`object-contain ${sub === "Platos" ? "w-8 h-8" : "w-6 h-6"}`}
-                  alt={sub}
-                />
+  src={iconSrc}
+  alt={sub}
+  className={`
+    object-contain
+    ${sub === "Platos" ? "w-10 h-10" : ""}
+    ${sub === "Bocadillos" ? "w-7 h-7 ml-1" : ""}
+    ${sub === "Postres" ? "w-6 h-6" : ""}
+    ${sub !== "Platos" && sub !== "Bocadillos" && sub !== "Postres" ? "w-6 h-6" : ""}
+  `}
+/>
                 
                 <span className="truncate">{sub}</span>
               </button>
