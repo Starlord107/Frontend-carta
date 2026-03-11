@@ -1,14 +1,9 @@
 import { useState, useEffect } from "react";
 import HeaderCliente from "../../components/HeaderCliente";
 import TabsCategoria from "../../components/TabsCategoria";
-import ProductoCard from "../../components/ProductoCard";
-import CarritoDrawer from "../../components/CarritoDrawer";
-import ModalPedidoEnviado from "../../components/ModalPedidoEnviado";
-import { useParams } from "react-router-dom";
-import PedidoActualDrawer from "../../components/PedidoActualDrawer";
+import ProductoCardCliente from "../../components/ProductoCardCliente";
 
 function Carta() {
-  const { mesaId } = useParams();
   const [productos, setProductos] = useState([]);
 
   const categorias = {
@@ -19,13 +14,6 @@ function Carta() {
   const [categoriaPrincipal, setCategoriaPrincipal] = useState("Bebidas");
   const [categoriaSecundaria, setCategoriaSecundaria] = useState(categorias.Bebidas[0]);
 
-  const [carrito, setCarrito] = useState([]);
-  const [carritoVisible, setCarritoVisible] = useState(false);
-  const [pedidoModalOpen, setPedidoModalOpen] = useState(false);
-  const [pedidoExistente, setPedidoExistente] = useState(null);
-  const [drawerPedidoExistenteAbierto, setDrawerPedidoExistenteAbierto] = useState(false);
-
-  // Cuando cambie la categoría principal, seleccionar automáticamente la primera subcategoría
   useEffect(() => {
     setCategoriaSecundaria(categorias[categoriaPrincipal][0]);
   }, [categoriaPrincipal]);
@@ -37,152 +25,38 @@ function Carta() {
         const productosConSubcategoria = data.map((p) => {
           if (p.subcategoria) return p;
 
-          if (p.imagen.includes("Bocadillos")) return { ...p, subcategoria: "Bocadillos" };
-          if (p.imagen.includes("Hamburguesas")) return { ...p, subcategoria: "Hamburguesas" };
-          if (p.imagen.includes("Tapas")) return { ...p, subcategoria: "Tapas" };
-          if (p.imagen.includes("Platos")) return { ...p, subcategoria: "Platos" };
-          if (p.imagen.includes("Postres")) return { ...p, subcategoria: "Postres" };
+          if (p.imagen?.includes("Bocadillos")) return { ...p, subcategoria: "Bocadillos" };
+          if (p.imagen?.includes("Hamburguesas")) return { ...p, subcategoria: "Hamburguesas" };
+          if (p.imagen?.includes("Tapas")) return { ...p, subcategoria: "Tapas" };
+          if (p.imagen?.includes("Platos")) return { ...p, subcategoria: "Platos" };
+          if (p.imagen?.includes("Postres")) return { ...p, subcategoria: "Postres" };
 
-          if (p.imagen.includes("Cocteles")) return { ...p, subcategoria: "Cocteles" };
-          if (p.imagen.includes("Vinos")) return { ...p, subcategoria: "Vinos" };
-          if (p.imagen.includes("Sangrias")) return { ...p, subcategoria: "Sangrias" };
-          if (p.imagen.includes("Refrescos")) return { ...p, subcategoria: "Refrescos" };
-          if (p.imagen.includes("Tragos")) return { ...p, subcategoria: "Tragos" };
-          if (p.imagen.includes("Cervezas")) return { ...p, subcategoria: "Cervezas" };
+          if (p.imagen?.includes("Cocteles")) return { ...p, subcategoria: "Cocteles" };
+          if (p.imagen?.includes("Vinos")) return { ...p, subcategoria: "Vinos" };
+          if (p.imagen?.includes("Sangrias")) return { ...p, subcategoria: "Sangrias" };
+          if (p.imagen?.includes("Refrescos")) return { ...p, subcategoria: "Refrescos" };
+          if (p.imagen?.includes("Tragos")) return { ...p, subcategoria: "Tragos" };
+          if (p.imagen?.includes("Cervezas")) return { ...p, subcategoria: "Cervezas" };
 
           return p;
         });
 
         setProductos(productosConSubcategoria);
+      })
+      .catch((error) => {
+        console.error("Error cargando productos:", error);
       });
   }, []);
 
-  useEffect(() => {
-    fetch(`http://localhost:4000/api/pedidos/mesa/${mesaId}`)
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.length > 0) {
-          const pedidos = data.map((p) => p.items);
-          setPedidoExistente(pedidos);
-          setDrawerPedidoExistenteAbierto(true);
-        }
-      });
-  }, [mesaId]);
-
-  const añadirAlCarrito = (producto, cantidadElegida) => {
-    setCarrito((prev) => {
-      const existe = prev.find(
-        (p) => p.id === producto.id && p.formato === producto.formato
-      );
-
-      if (existe) {
-        return prev.map((p) =>
-          p.id === producto.id && p.formato === producto.formato
-            ? {
-                ...p,
-                cantidad: p.cantidad + cantidadElegida,
-                precio_total: (p.cantidad + cantidadElegida) * p.precio,
-              }
-            : p
-        );
-      }
-
-      return [
-        ...prev,
-        {
-          ...producto,
-          cantidad: cantidadElegida,
-          precio_total: cantidadElegida * producto.precio,
-        },
-      ];
-    });
-  };
-
-  const aumentarCantidad = (id) => {
-    setCarrito((prev) =>
-      prev.map((item) =>
-        item.id === id
-          ? {
-              ...item,
-              cantidad: item.cantidad + 1,
-              precio_total: (item.cantidad + 1) * item.precio,
-            }
-          : item
-      )
-    );
-  };
-
-  const disminuirCantidad = (id) => {
-    setCarrito((prev) =>
-      prev
-        .map((item) =>
-          item.id === id
-            ? {
-                ...item,
-                cantidad: Math.max(0, item.cantidad - 1),
-                precio_total: Math.max(0, item.cantidad - 1) * item.precio,
-              }
-            : item
-        )
-        .filter((item) => item.cantidad > 0)
-    );
-  };
-
-  const eliminarProducto = (id) => {
-    setCarrito((prev) => prev.filter((item) => item.id !== id));
-  };
-
-  // Filtrado limpio: siempre hay una subcategoría seleccionada
   const productosFiltrados = productos.filter(
     (p) =>
       p.categoria === categoriaPrincipal &&
       p.subcategoria === categoriaSecundaria
   );
 
-  const enviarPedido = () => {
-    if (carrito.length === 0) return;
-
-    const total = carrito.reduce(
-      (acc, item) => acc + item.precio * item.cantidad,
-      0
-    );
-
-    fetch("http://localhost:4000/api/pedidos/", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        mesa_id: mesaId,
-        items: carrito,
-        total: total,
-        fecha: new Date().toISOString(),
-      }),
-    })
-      .then((res) => res.json())
-      .then(() => {
-        fetch(`http://localhost:4000/api/mesas/${mesaId}/estado`, {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ estado: "ocupada" }),
-        });
-
-        setCarritoVisible(false);
-
-        setTimeout(() => {
-          setCarrito([]);
-          setPedidoModalOpen(true);
-        }, 350);
-      });
-  };
-
   return (
     <div className="w-full min-h-screen bg-[#f4f7fb] flex flex-col">
-      <HeaderCliente
-        
-      />
+      <HeaderCliente />
 
       <main className="w-full max-w-screen-sm mx-auto px-3">
         <TabsCategoria
@@ -195,40 +69,13 @@ function Carta() {
 
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 p-4">
         {productosFiltrados.map((p) => (
-          <ProductoCard
+          <ProductoCardCliente
             key={p.id}
             producto={p}
-            añadirAlCarrito={añadirAlCarrito}
+            categoriaSecundaria={categoriaSecundaria}
           />
         ))}
       </div>
-
-      <CarritoDrawer
-        abierto={carritoVisible}
-        cerrar={() => setCarritoVisible(false)}
-        carrito={carrito}
-        enviarPedido={enviarPedido}
-        aumentarCantidad={aumentarCantidad}
-        disminuirCantidad={disminuirCantidad}
-        eliminarProducto={eliminarProducto}
-      />
-
-      {pedidoExistente && (
-        <PedidoActualDrawer
-          abierto={drawerPedidoExistenteAbierto}
-          cerrar={() => setDrawerPedidoExistenteAbierto(false)}
-          pedido={pedidoExistente}
-          abrirNuevoPedido={() => {
-            setDrawerPedidoExistenteAbierto(false);
-            setCarritoVisible(false);
-          }}
-        />
-      )}
-
-      <ModalPedidoEnviado
-        abierto={pedidoModalOpen}
-        cerrar={() => setPedidoModalOpen(false)}
-      />
     </div>
   );
 }

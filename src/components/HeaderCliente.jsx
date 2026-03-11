@@ -1,11 +1,6 @@
-import { Badge, Button } from "@heroui/react";
-import CarroIcon from "./CarroIcon";
 import LogoIcon from "./LogoIcon";
-import BandejaIcon from "./bandejaIcon";
-import { useNavigate } from "react-router-dom";
 
 function HeaderCliente() {
-  const navigate = useNavigate();
 
   return (
     <header className="flex justify-between items-center   border-b border-[#9ee4ff] px-6 py-4"
