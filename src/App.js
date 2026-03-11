@@ -1,10 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 // RUTAS CAMARERO
-import SeleccionarMesa from "./pages/camarero/SeleccionarMesa";
-import Carta from "./pages/camarero/Carta";
-import LoginCamarero from "./pages/camarero/LoginCamarero";
-import AdminProductos from "./pages/camarero/AdminProductos";
 import { Navigate } from "react-router-dom";
 
 
