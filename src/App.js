@@ -12,7 +12,6 @@ import { Navigate } from "react-router-dom";
 import CartaCliente from "./pages/cliente/CartaCliente";
 
 // PROTECCIÓN DE RUTAS
-import PrivateRoute from "./components/PrivateRoute";
 
 function App() {
   return (
