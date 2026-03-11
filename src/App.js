@@ -1,7 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 // RUTAS CAMARERO
-import { Navigate } from "react-router-dom";      
 
 import Carta from "./pages/cliente/CartaCliente";
 

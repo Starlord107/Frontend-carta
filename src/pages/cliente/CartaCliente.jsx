@@ -3,13 +3,14 @@ import HeaderCliente from "../../components/HeaderCliente";
 import TabsCategoria from "../../components/TabsCategoria";
 import ProductoCardCliente from "../../components/ProductoCardCliente";
 
-function Carta() {
-  const [productos, setProductos] = useState([]);
-
   const categorias = {
     Bebidas: ["Cocteles", "Vinos", "Sangrias", "Tragos", "Refrescos", "Cervezas"],
     Comidas: ["Hamburguesas", "Tapas", "Bocadillos", "Platos", "Postres"],
   };
+
+function Carta() {
+  const [productos, setProductos] = useState([]);
+
 
   const [categoriaPrincipal, setCategoriaPrincipal] = useState("Bebidas");
   const [categoriaSecundaria, setCategoriaSecundaria] = useState(categorias.Bebidas[0]);
