@@ -54,7 +54,8 @@ export default function CategoriasTabs({
           <Tab
             key="Comidas"
             title={
-              <div className="flex items-center justify-center w-full gap-2">
+              <div className="flex items-center justify-start ">
+                <div className="flex items-center justify-center w-full gap-2"></div>
                 <img
                   src={categoriaPrincipal === "Comidas" ? "/sswhite.png" : "/ss.png"}
                   width="30"
@@ -107,9 +108,11 @@ export default function CategoriasTabs({
   alt={sub}
   className={`
     object-contain
-    ${sub === "Platos" ? "w-10 h-10" : ""}
-    ${sub === "Bocadillos" ? "w-7 h-7 ml-1" : ""}
-    ${sub === "Postres" ? "w-6 h-6" : ""}
+        ${sub === "Hamburguesas" ? "w-6 h-12" : ""}
+
+    ${sub === "Platos" ? "w-6 h-12" : ""}
+    ${sub === "Bocadillos" ? "w-12 h-7 " : ""}
+    ${sub === "Postres" ? " h-12" : ""}
     ${sub !== "Platos" && sub !== "Bocadillos" && sub !== "Postres" ? "w-6 h-6" : ""}
   `}
 />
