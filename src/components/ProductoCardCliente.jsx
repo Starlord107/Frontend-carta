@@ -18,8 +18,10 @@ function ProductoCardCliente({ producto, categoriaSecundaria }) {
 
   const formatosOrdenados = tieneFormatos
     ? [...producto.formatos].sort((a, b) => {
-        if (a.nombre === "Copa") return -1;
-        if (b.nombre === "Copa") return 1;
+      const nombreA=a.nombre.toLowerCase();
+      const nombreB=b.nombre.toLowerCase();
+        if (nombreA === "copa") return -1;
+        if (nombreB === "copa") return 1;
         return 0;
       })
     : [];
