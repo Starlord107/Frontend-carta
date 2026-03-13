@@ -1,16 +1,7 @@
 import { useState } from "react";
 
 const imagenesPorCerveza = {
-  "Estrella Damm": {
-    "1/5": "https://res.cloudinary.com/dnhmo2rbe/image/upload/v1764935385/estrella1_2_vbecb3.jpg",
-    "Botella": "https://res.cloudinary.com/dnhmo2rbe/image/upload/v1764935385/estrella1_2_vbecb3.jpg",
-    "Copa": "https://res.cloudinary.com/dnhmo2rbe/image/upload/v1764935745/copaEstrella_b8kzgk.jpg",
-    "Jarra": "https://res.cloudinary.com/dnhmo2rbe/image/upload/v1764935744/jarraestrella_rm5lpk.jpg",
-  },
-  "Turia": {
-    "Copa": "https://res.cloudinary.com/dnhmo2rbe/image/upload/v1764935827/turiacopa_qkkwsm.jpg",
-    "Jarra": "https://res.cloudinary.com/dnhmo2rbe/image/upload/v1764936016/jarraturia_edqyw1.webp",
-  },
+
   "Voll Damm": {
     "Botella": "https://res.cloudinary.com/dnhmo2rbe/image/upload/v1764936181/volldamm_sswdvu.webp",
   },
