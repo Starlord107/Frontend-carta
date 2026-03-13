@@ -1,11 +1,35 @@
 import { useState } from "react";
 
+const imagenesPorCerveza = {
+  "Estrella Damm": {
+    "1/5": "https://res.cloudinary.com/dnhmo2rbe/image/upload/v1764935385/estrella1_2_vbecb3.jpg",
+    "Botella": "https://res.cloudinary.com/dnhmo2rbe/image/upload/v1764935385/estrella1_2_vbecb3.jpg",
+    "Copa": "https://res.cloudinary.com/dnhmo2rbe/image/upload/v1764935745/copaEstrella_b8kzgk.jpg",
+    "Jarra": "https://res.cloudinary.com/dnhmo2rbe/image/upload/v1764935744/jarraestrella_rm5lpk.jpg",
+  },
+  "Turia": {
+    "Copa": "https://res.cloudinary.com/dnhmo2rbe/image/upload/v1764935827/turiacopa_qkkwsm.jpg",
+    "Jarra": "https://res.cloudinary.com/dnhmo2rbe/image/upload/v1764936016/jarraturia_edqyw1.webp",
+  },
+  "Voll Damm": {
+    "Botella": "https://res.cloudinary.com/dnhmo2rbe/image/upload/v1764936181/volldamm_sswdvu.webp",
+  },
+  "Free Damm": {
+    "Botella": "https://res.cloudinary.com/dnhmo2rbe/image/upload/v1764936247/free-damm_syh8bd.jpg",
+  },
+  "Free Damm (Tostada)": {
+    "Botella": "https://res.cloudinary.com/dnhmo2rbe/image/upload/v1764936377/tosta_mfrbuj.png",
+  },
+  "Daura (Sin gluten)": {
+    "Botella": "https://res.cloudinary.com/dnhmo2rbe/image/upload/v1764936421/daura_e1prqx.jpg",
+  },
+};
 
 function ProductoCardCliente({ producto, categoriaSecundaria }) {
   const tieneFormatos = producto.formatos && producto.formatos.length > 0;
 
   const [formatoActual, setFormatoActual] = useState(
-    tieneFormatos ? producto.formatos[0] : null
+    tieneFormatos.length > 0 ? producto.formatos[0] : null
   );
 
   const marca = producto.nombre;
@@ -16,16 +40,19 @@ function ProductoCardCliente({ producto, categoriaSecundaria }) {
 
   const precioFinal = tieneFormatos ? formatoActual?.precio : producto.precio;
 
-  const formatosOrdenados = tieneFormatos
-    ? [...producto.formatos].sort((a, b) => {
-      const nombreA=a.nombre.toLowerCase();
-      const nombreB=b.nombre.toLowerCase();
-        if (nombreA === "copa") return -1;
-        if (nombreB === "copa") return 1;
-        return 0;
-      })
-    : [];
+ const formatosOrdenados = tieneFormatos
+  ? [...producto.formatos].sort((a, b) => {
+      const orden = (nombre) => {
+        const n = nombre.toLowerCase();
 
+        if (n.includes("copa")) return 1;
+        if (n.includes("botella")) return 2;
+        return 3;
+      };
+
+      return orden(a.nombre) - orden(b.nombre);
+    })
+  : [];
   return (
     <div
       className="rounded-xl bg-white border border-[#8fdfff] shadow-[0_0_15px_rgba(46,107,255,0.3)] p-4 bg-cover bg-center"
