@@ -2,18 +2,16 @@ import { useState } from "react";
 
 const imagenesPorCerveza = {
 
-  "Voll Damm": {
-    "Botella": "https://res.cloudinary.com/dnhmo2rbe/image/upload/v1764936181/volldamm_sswdvu.webp",
+  "Estrella Damm": {
+    "Botella": "https://res.cloudinary.com/dnhmo2rbe/image/upload/v1773438852/ChatGPT_Image_13_mar_2026_22_53_59_mprwno.png",
+    "Jarra": "https://res.cloudinary.com/dnhmo2rbe/image/upload/v1773439037/ChatGPT_Image_13_mar_2026_22_57_01_mwity6.png",
+    "1/5": "https://res.cloudinary.com/dnhmo2rbe/image/upload/v1773438958/ChatGPT_Image_13_mar_2026_22_55_47_aw5eqb.png"
   },
-  "Free Damm": {
-    "Botella": "https://res.cloudinary.com/dnhmo2rbe/image/upload/v1764936247/free-damm_syh8bd.jpg",
-  },
-  "Free Damm (Tostada)": {
-    "Botella": "https://res.cloudinary.com/dnhmo2rbe/image/upload/v1764936377/tosta_mfrbuj.png",
-  },
-  "Daura (Sin gluten)": {
-    "Botella": "https://res.cloudinary.com/dnhmo2rbe/image/upload/v1764936421/daura_e1prqx.jpg",
-  },
+  "Turia":{
+    "Jarra":"https://res.cloudinary.com/dnhmo2rbe/image/upload/v1773439386/ChatGPT_Image_13_mar_2026_23_02_41_qlwwbr.png"
+  }
+
+
 };
 
 function ProductoCardCliente({ producto, categoriaSecundaria }) {
@@ -59,12 +57,14 @@ function ProductoCardCliente({ producto, categoriaSecundaria }) {
         <img
           src={imagenDinamica}
           alt={producto.nombre}
+          
           className="w-full h-64 object-cover rounded-lg mb-3"
         />
       ) : producto.imagen ? (
         <img
           src={producto.imagen}
           alt={producto.nombre}
+
           className="w-full h-64 object-cover rounded-lg mb-3"
         />
       ) : (
@@ -111,7 +111,7 @@ function ProductoCardCliente({ producto, categoriaSecundaria }) {
           )}
 
           <p className="text-[#1f40ff] font-bold mb-8 py-2">
-            {precioFinal ? `${precioFinal} €` : ""}
+            {precioFinal ? `${precioFinal} €` : producto.precio ? `${producto.precio} €` : ""}
           </p>
         </div>
       </div>
