@@ -13,7 +13,14 @@ export default function CategoriasTabs({
 
   return (
     <div className="flex flex-col items-center gap-6 mt-6">
-      <div className="bg-white border border-[#8fdfff] rounded-2xl px-3 py-2 shadow-md w-full">
+      <div
+        className="bg-white border border-[#8fdfff] rounded-2xl px-3 py-2 shadow-md w-full"
+        style={{
+          backgroundImage: "url('/Fondos/fondofinal.png')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      >
         <Tabs
           disableAnimation
           fullWidth
@@ -26,7 +33,7 @@ export default function CategoriasTabs({
           variant="solid"
           radius="lg"
           classNames={{
-            tabList: "gap-4",
+            tabList: "gap-4 bg-transparent",
             tab: `
               flex-1 min-w-0 text-center
               px-4 py-2 rounded-xl text-sm font-semibold
@@ -42,7 +49,11 @@ export default function CategoriasTabs({
             title={
               <div className="flex items-center justify-center w-full gap-2">
                 <img
-                  src={categoriaPrincipal === "Bebidas" ? "/bebidas/bebidawhite.png" : "/bebidas/bebida.png"}
+                  src={
+                    categoriaPrincipal === "Bebidas"
+                      ? "/bebidas/bebidawhite.png"
+                      : "/bebidas/bebida.png"
+                  }
                   width="30"
                   height="40"
                   alt="Bebidas"
@@ -54,8 +65,7 @@ export default function CategoriasTabs({
           <Tab
             key="Comidas"
             title={
-              <div className="flex items-center justify-start ">
-                <div className="flex items-center justify-center w-full gap-2"></div>
+              <div className="flex items-center justify-center w-full gap-2">
                 <img
                   src={categoriaPrincipal === "Comidas" ? "/sswhite.png" : "/ss.png"}
                   width="30"
@@ -72,7 +82,9 @@ export default function CategoriasTabs({
       <div className="bg-white border border-[#8fdfff] rounded-2xl px-3 py-3 shadow-md w-full">
         <div
           className={`grid gap-3 ${
-            categoriaPrincipal === "Bebidas" ? "grid-cols-2 sm:grid-cols-3" : "grid-cols-2"
+            categoriaPrincipal === "Bebidas"
+              ? "grid-cols-2 sm:grid-cols-3"
+              : "grid-cols-2"
           }`}
         >
           {categorias[categoriaPrincipal].map((sub) => {
@@ -92,31 +104,41 @@ export default function CategoriasTabs({
 
             const seleccionada = categoriaSecundaria === sub;
 
+            const iconSize =
+              sub === "Bocadillos"
+                ? "w-6 h-6"
+                : sub === "Postres"
+                ? "w-12 h-12"
+                : sub === "Platos"
+                ? "w-14 h-12"
+                : "w-6 h-6";
+
             return (
               <button
                 key={sub}
                 type="button"
                 onClick={() => setCategoriaSecundaria(sub)}
+                style={
+                  !seleccionada
+                    ? {
+                        backgroundImage: "url('/Fondos/fondofinal.png')",
+                        backgroundSize: "cover",
+                        backgroundPosition: "center",
+                      }
+                    : {}
+                }
                 className={`flex items-center justify-center gap-2 rounded-xl px-3 py-3 text-sm font-semibold min-h-[56px] transition-all duration-200 ${
                   seleccionada
                     ? "bg-[#1f40ff] text-white shadow-md"
-                    : "bg-transparent text-black hover:bg-[#eef4ff]"
+                    : "text-black hover:bg-[#eef4ff]"
                 }`}
               >
                 <img
-  src={iconSrc}
-  alt={sub}
-  className={`
-    object-contain
-        ${sub === "Hamburguesas" ? "w-6 h-12" : ""}
+                  src={iconSrc}
+                  alt={sub}
+                  className={`object-contain ${iconSize}`}
+                />
 
-    ${sub === "Platos" ? "w-6 h-12" : ""}
-    ${sub === "Bocadillos" ? "w-12 h-7 " : ""}
-    ${sub === "Postres" ? " h-12" : ""}
-    ${sub !== "Platos" && sub !== "Bocadillos" && sub !== "Postres" ? "w-6 h-6" : ""}
-  `}
-/>
-                
                 <span className="truncate">{sub}</span>
               </button>
             );

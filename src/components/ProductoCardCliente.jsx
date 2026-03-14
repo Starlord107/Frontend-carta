@@ -58,14 +58,14 @@ function ProductoCardCliente({ producto, categoriaSecundaria }) {
           src={imagenDinamica}
           alt={producto.nombre}
           
-          className="w-full h-64 object-cover rounded-lg mb-3"
+          className="w-full h-150 object-cover rounded-lg mb-3"
         />
       ) : producto.imagen ? (
         <img
           src={producto.imagen}
           alt={producto.nombre}
 
-          className="w-full h-64 object-cover rounded-lg mb-3"
+          className="w-full h-150 object-cover rounded-lg mb-3"
         />
       ) : (
         <div className="w-full rounded-lg mb-3 bg-black/5 p-3 text-sm text-[#1f40ff] leading-tight">
