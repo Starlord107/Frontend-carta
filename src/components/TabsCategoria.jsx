@@ -81,26 +81,10 @@ export default function CategoriasTabs({
               .normalize("NFD")
               .replace(/[\u0300-\u036f]/g, "");
 
-            const iconSrc =
-              categoriaPrincipal === "Bebidas"
-                ? categoriaSecundaria === sub
-                  ? `/bebidas/${fileName}white.png`
-                  : `/bebidas/${fileName}.png`
-                : categoriaSecundaria === sub
-                ? `/comidas/${fileName}white.png`
-                : `/comidas/${fileName}.png`;
 
             const seleccionada = categoriaSecundaria === sub;
 
-            const iconSize =
-              sub === "Bocadillos"
-                ? "w-8 h-8"
-                : sub === "Postres"
-                ? "w-10 h-10"
-                : sub === "Platos"
-                ? "w-14 h-12"
-                : "w-6 h-6";
-
+           
             return (
               <button
                 key={sub}
