@@ -7,7 +7,7 @@ export default function CategoriasTabs({
   setCategoriaSecundaria,
 }) {
   const categorias = {
-    Bebidas: ["Cocteles", "Vinos", "Sangrias", "Tragos", "Refrescos", "Cervezas"],
+    Bebidas: ["Cócteles", "Vinos", "Sangrías", "Tragos", "Refrescos", "Cervezas"],
     Comidas: ["Hamburguesas", "Tapas", "Bocadillos", "Platos", "Postres"],
   };
 
