@@ -32,6 +32,7 @@ export default function CategoriasTabs({
           color="default"
           variant="solid"
           radius="lg"
+          size="lg"
           classNames={{
             tabList: "gap-4 bg-transparent",
             tab: `
@@ -46,18 +47,10 @@ export default function CategoriasTabs({
         >
           <Tab
             key="Bebidas"
+            
             title={
               <div className="flex items-center justify-center w-full gap-2">
-                <img
-                  src={
-                    categoriaPrincipal === "Bebidas"
-                      ? "/bebidas/bebidawhite.png"
-                      : "/bebidas/bebida.png"
-                  }
-                  width="30"
-                  height="40"
-                  alt="Bebidas"
-                />
+               
                 <span>Bebidas</span>
               </div>
             }
@@ -66,12 +59,7 @@ export default function CategoriasTabs({
             key="Comidas"
             title={
               <div className="flex items-center justify-center w-full gap-2">
-                <img
-                  src={categoriaPrincipal === "Comidas" ? "/sswhite.png" : "/ss.png"}
-                  width="30"
-                  height="40"
-                  alt="Comidas"
-                />
+              
                 <span>Comidas</span>
               </div>
             }
@@ -106,9 +94,9 @@ export default function CategoriasTabs({
 
             const iconSize =
               sub === "Bocadillos"
-                ? "w-6 h-6"
+                ? "w-8 h-8"
                 : sub === "Postres"
-                ? "w-12 h-12"
+                ? "w-10 h-10"
                 : sub === "Platos"
                 ? "w-14 h-12"
                 : "w-6 h-6";
@@ -119,6 +107,7 @@ export default function CategoriasTabs({
                 type="button"
                 onClick={() => setCategoriaSecundaria(sub)}
                 style={
+                  
                   !seleccionada
                     ? {
                         backgroundImage: "url('/Fondos/fondofinal.png')",
@@ -128,16 +117,14 @@ export default function CategoriasTabs({
                     : {}
                 }
                 className={`flex items-center justify-center gap-2 rounded-xl px-3 py-3 text-sm font-semibold min-h-[56px] transition-all duration-200 ${
+                  sub==="Postres"?"col-span-2":""
+                  } ${
                   seleccionada
                     ? "bg-[#1f40ff] text-white shadow-md"
                     : "text-black hover:bg-[#eef4ff]"
                 }`}
               >
-                <img
-                  src={iconSrc}
-                  alt={sub}
-                  className={`object-contain ${iconSize}`}
-                />
+              
 
                 <span className="truncate">{sub}</span>
               </button>

@@ -94,8 +94,12 @@ function ProductoCardCliente({ producto, categoriaSecundaria }) {
 
       <div className="mb-4 py-4 text-center">
         <div
-          className="bg-white"
+        
+          className="bg-"
           style={{
+            backgroundImage: "url('/Fondos/fondofinal.png')",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
             borderRadius: "20px",
             overflow: "hidden",
           }}
