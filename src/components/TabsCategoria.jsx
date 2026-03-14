@@ -76,15 +76,14 @@ export default function CategoriasTabs({
           }`}
         >
           {categorias[categoriaPrincipal].map((sub) => {
-            const fileName = sub
-              .toLowerCase()
-              .normalize("NFD")
-              .replace(/[\u0300-\u036f]/g, "");
+           
 
+           
 
             const seleccionada = categoriaSecundaria === sub;
 
-           
+            
+
             return (
               <button
                 key={sub}
